@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<ajaxcart translate="title" module="ajaxcart">
+										<title>Config MagentoGarden Ajax Cart Lite</title>
+										<sort_order>50</sort_order>
+									</ajaxcart>
+								</children>
+							</config>
+						</children>
+					</system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>
