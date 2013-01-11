@@ -1,0 +1,105 @@
+<?php
+/**
+ * MagentoGarden
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentogarden.com so we can send you a copy immediately.
+ *
+ * @category    design
+ * @package     magentogarden_ajaxcartlite
+ * @copyright   Copyright (c) 2012 MagentoGarden Inc. (http://www.magentogarden.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ * @version		1.1
+ * @author		Alan Marcus (alan.marcus@magentogarden.com);
+ */
+
+<?php $_product = $this->getProduct(); ?>
+<?php $buttonTitle = $this->__('Add to Cart'); ?>
+<?php if($_product->isSaleable()): ?>
+    <div class="add-to-cart">
+        <?php if(!$_product->isGrouped()): ?>
+        <label for="qty"><?php echo $this->__('Qty:') ?></label>
+        <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+        <?php endif; ?>
+        <button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart"><span><span><?php echo $buttonTitle ?></span></span></button>
+        <?php echo $this->getChildHtml('', true, true) ?>
+    </div>
+    <div class="mg-ajaxcart-dialog">
+    	<div class="product-info">
+    		<img />
+    		<span class="msg"><?php echo $this->__('You have added ');?> <span class="name"></span> into shopping cart. </span>
+    	</div>
+    	<div class="button-set">
+	    	<a href="#" class="continue-shop"><span><?php echo $this->__('Continue Shopping');?></span></a>
+	    	<a href="#" class="goto-cart"><span><?php echo $this->__('Go To Shopping Cart');?></span></a>
+		</div>
+		<div style="clear:both;"></div>
+    </div>
+<?php endif; ?>
+
+<script type="text/javascript">
+	(function ($) {
+		var constants = {
+			form_key: '<?php echo Mage::helper('ajaxcart')->get_form_key(); ?>',
+			form_selector: '#product_addtocart_form',
+			url: {
+				add: '<?php echo Mage::helper('ajaxcart')->get_add_url(); ?>',
+				info: '<?php echo Mage::helper('ajaxcart')->get_info_url(); ?>',
+				cart: '<?php echo Mage::helper('ajaxcart')->get_cart_url(); ?>'
+			}
+		};
+
+		var methods = {
+			add: function() {
+				$.fn.mg.ajax(
+					constants.url.add, 
+					$(constants.form_selector).serialize(), 
+					function(response) {
+						response = $.parseJSON(response);
+						if (response.success) {
+							methods.info.apply(this);
+						} else {
+							alert(response.message);
+						}
+					}
+				);
+			},
+			info: function() {
+				$.fn.mg.ajax(
+					constants.url.info,
+					null, 
+					function(response) {
+						methods.update.call(this, $.parseJSON(response).data);
+					}
+				);
+			},
+			update: function(data) {
+				$('.top-link-cart').html(data.toplink);
+				$('.block-cart').replaceWith(data.sidebar);
+				$('.mg-ajaxcart-dialog .product-info .msg .name').html(data.name);
+				$('.mg-ajaxcart-dialog .product-info img').attr('src', data.thumbnail);
+				$.fancybox($('.mg-ajaxcart-dialog'));
+			}
+		};
+
+		$.fn.ajaxcart = function() {
+			$(this).click(function() {
+				methods.add.apply(this);
+
+			});
+			$('.continue-shop').click(function() { $.fancybox.close(); return false; });
+			$('.goto-cart').click(function() { window.location = constants.url.cart; return false; });
+		}; 
+	})(jQuery);
+
+	(function($) {
+		$('.btn-cart').ajaxcart();
+	})(jQuery);
+</script>

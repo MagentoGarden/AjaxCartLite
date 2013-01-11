@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <ajaxcart_adminhtml_ajaxcart_index>
+        <reference name="content">
+            <block type="ajaxcart/adminhtml_ajaxcart" name="ajaxcart" />
+        </reference>
+    </ajaxcart_adminhtml_ajaxcart_index>
+</layout>
