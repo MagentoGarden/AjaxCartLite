@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<layout version="1.0.0">
+    <catalog_product_view translate="label">
+    
+    	<reference name="head">
+            <!-- If you have already include jquery library in your website, please comment the following tags -->
+			<action method="addJs" ifconfig="ajaxcart/general/jquery"><script>magentogarden/jquery-1.8.3.min.js</script></action>
+			<action method="addJs" ifconfig="ajaxcart/general/jquery"><script>magentogarden/global.js</script></action>
+            <!-- End If -->
+
+			<action method="addJs" ifconfig="ajaxcart/general/enabled"><script>magentogarden/jquery.utility.js</script></action>
+
+			<action method="addCss"><stylesheet>magentogarden/ajaxcart/css/ajaxcart.css</stylesheet></action>
+
+            <action method="addCss" ifconfig="ajaxcart/general/fancybox"><stylesheet>magentogarden/ajaxcart/js/fancybox/jquery.fancybox.css</stylesheet></action>
+            <action method="addItem" ifconfig="ajaxcart/general/fancybox"><type>skin_js</type><name>magentogarden/ajaxcart/js/fancybox/jquery.fancybox.js</name><params/></action>
+		</reference>
+		
+    	<reference name="product.info">
+    		<block type="ajaxcart/product_view" name="ajaxcart.addtocart" as="addtocart" template="ajaxcart/catalog/product/view/addtocart.phtml"/>
+    		<block type="catalog/product_view" name="ajaxcart.product.info.addto" as="addto" template="catalog/product/view/addto.phtml"/>
+    	</reference>
+    	
+    	<reference name="product.info.options.wrapper.bottom">
+    		<remove name="product.info.addtocart" />
+    		<remove name="product.info.addto" />
+    		<block type="ajaxcart/product_view" name="ajaxcart.addtocart" as="addtocart" template="ajaxcart/catalog/product/view/addtocart.phtml"/>
+    		<action method="append"><block>ajaxcart.addtocart</block></action>
+    		<action method="append"><block>product.info.addto</block></action>
+    	</reference>
+    </catalog_product_view>
+</layout> 
