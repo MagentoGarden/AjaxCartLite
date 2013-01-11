@@ -1,0 +1,33 @@
+/**
+ * MagentoGarden
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentogarden.com so we can send you a copy immediately.
+ *
+ * @category    css
+ * @package     magentogarden_ajaxcartlite
+ * @copyright   Copyright (c) 2012 MagentoGarden Inc. (http://www.magentogarden.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ * @version		1.1
+ * @author		Alan Marcus (alan.marcus@magentogarden.com);
+ */
+
+.mg-ajaxcart-dialog a { text-decoration: none; }
+
+.mg-ajaxcart-dialog { display: none; position: relative; width: 410px; padding: 7px; }
+.mg-ajaxcart-dialog .product-info { text-align: left; }
+.mg-ajaxcart-dialog .product-info img { width: 80px; height: 80px; border: 1px solid #ddd; padding: 5px; }
+.mg-ajaxcart-dialog .product-info .msg { margin-left: 5px; }
+.mg-ajaxcart-dialog .product-info .name { font-weight: bold; }
+
+.mg-ajaxcart-dialog .button-set { margin-top: 10px; }
+.mg-ajaxcart-dialog .button-set a span { display: block; background-color: #f18200; height: 19px; padding: 0 8px; text-align: center; border: 1px solid #de5400; color: #fff; }
+.mg-ajaxcart-dialog a.continue-shop { float: left; }
+.mg-ajaxcart-dialog a.goto-cart { float: right; }
